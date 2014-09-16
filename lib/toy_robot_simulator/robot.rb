@@ -21,6 +21,9 @@ module ToyRobotSimulator
     end
 
     def report
+      raise "NotPlacedRobot" unless placed?
+
+      "#{x}, #{y}, #{facing}"
     end
 
     def placed?

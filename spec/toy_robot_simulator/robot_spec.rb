@@ -36,6 +36,22 @@ describe ToyRobotSimulator::Robot do
   end
 
   describe "#report" do
+    context "when robot is placed" do
+      let(:pos_x) { 0 }
+      let(:pos_y) { 0 }
+      let(:facing) { "NORTH" }
+      subject { robot.place(pos_x, pos_y, facing) }
+
+      it "shows its current position" do
+        expect(subject.report).to eq "#{pos_x}, #{pos_y}, #{facing}"
+      end
+    end
+
+    context "when robot is not placed" do
+      it "raises NotPlacedRobot" do
+        expect{ robot.report }.to raise_error("NotPlacedRobot")
+      end
+    end
   end
 
   describe "#placed?" do
