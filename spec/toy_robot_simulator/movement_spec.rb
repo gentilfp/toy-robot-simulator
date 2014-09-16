@@ -88,4 +88,44 @@ describe ToyRobotSimulator::Movement do
       end
     end
   end
+
+  describe "allowed_movement?" do
+    let(:allowed_turn?) { ToyRobotSimulator::Movement.allowed_turn?(turn) }
+
+    context "when turn is allowed" do
+      context "LEFT" do
+        let(:turn) { "LEFT" }
+
+        it "returns true" do
+          expect(allowed_turn?).to eq true
+        end
+      end
+
+      context "RIGHT" do
+        let(:turn) { "RIGHT" }
+
+        it "returns true" do
+          expect(allowed_turn?).to eq true
+        end
+      end
+    end
+
+    context "when turn is not allowed" do
+      context "when its nil" do
+        let(:turn) { nil }
+
+        it "returns false" do
+          expect(allowed_turn?).to eq false
+        end
+      end
+
+      context "when its invalid" do
+        let(:turn) { "DIREITA" }
+
+        it "returns false" do
+          expect(allowed_turn?).to eq false
+        end
+      end
+    end
+  end
 end
