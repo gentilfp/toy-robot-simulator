@@ -4,6 +4,7 @@ module ToyRobotSimulator
 
     def initialize
       @x = nil; @y = nil; @facing = nil
+      self
     end
 
     def place x, y, facing
@@ -14,10 +15,18 @@ module ToyRobotSimulator
       self
     end
 
-    def move
+    def move move
+      raise "RobotNotPlaced" unless placed?
+      raise "MoveCommandNotAllowed" unless ToyRobot::Movement.allowed_movement?(move)
+
+      self
     end
 
-    def turn
+    def turn turn
+      raise "RobotNotPlaced" unless placed?
+      raise "TurnCommandNotAllowed" unless ToyRobotSimulator::Movement.allowed_turn?(turn)
+
+      self
     end
 
     def report

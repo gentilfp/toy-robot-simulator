@@ -33,6 +33,46 @@ describe ToyRobotSimulator::Robot do
   end
 
   describe "#turn" do
+    let(:facing) { "NORTH" }
+    subject { robot.turn(turn) }
+
+    context "when robot is placed facing NORTH" do
+      before :each do
+        robot.place(0, 0, facing)
+      end
+
+      context "when turning LEFT" do
+        let(:turn) { "LEFT" }
+
+        it "turns robot to WEST" do
+          expect(subject.facing).to eq "WEST"
+        end
+      end
+
+      context "when turning RIGHT" do
+        let(:turn) { "RIGHT" }
+
+        it "turns robot to EAST" do
+          expect(subject.facing).to eq "EAST"
+        end
+      end
+
+      context "when movement is not allowed" do
+        let(:turn) { "DIREITA" }
+
+        it "raises TurnCommandNotAllowed exception" do
+          expect{ subject }.to raise_error "TurnCommandNotAllowed"
+        end
+      end
+    end
+
+    context "when robot is not placed" do
+      let(:turn) { "RIGHT" }
+
+      it "raises RobotNotPlaced exception" do
+        expect{ subject }.to raise_error "RobotNotPlaced"
+      end
+    end
   end
 
   describe "#report" do
