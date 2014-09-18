@@ -57,7 +57,7 @@ describe ToyRobotSimulator::Movement do
     end
   end
 
-  describe "allowed_movement?" do
+  describe ".allowed_movement?" do
     let(:allowed_movement?) { ToyRobotSimulator::Movement.allowed_movement?(movement) }
 
     context "when movement is allowed" do
@@ -89,7 +89,7 @@ describe ToyRobotSimulator::Movement do
     end
   end
 
-  describe "allowed_movement?" do
+  describe ".allowed_turn?" do
     let(:allowed_turn?) { ToyRobotSimulator::Movement.allowed_turn?(turn) }
 
     context "when turn is allowed" do
@@ -128,4 +128,88 @@ describe ToyRobotSimulator::Movement do
       end
     end
   end
+
+  describe ".turn" do
+    subject { described_class.turn(facing, turn) }
+    context "when facing NORTH" do
+      let(:facing) { "NORTH" }
+
+      context "and turning LEFT" do
+        let(:turn) { "LEFT" }
+
+        it "turns to WEAST" do
+          expect(subject).to eq "WEST"
+        end
+      end
+
+      context "and turning RIGHT" do
+        let(:turn) { "RIGHT" }
+
+        it "turns to EAST" do
+          expect(subject).to eq "EAST"
+        end
+      end
+    end
+
+    context "when facing SOUTH" do
+      let(:facing) { "SOUTH" }
+
+      context "and turning LEFT" do
+        let(:turn) { "LEFT" }
+
+        it "turns to EAST" do
+          expect(subject).to eq "EAST"
+        end
+      end
+
+      context "and turning RIGHT" do
+        let(:turn) { "RIGHT" }
+
+        it "turns to WEST" do
+          expect(subject).to eq "WEST"
+        end
+      end
+    end
+
+    context "when facing EAST" do
+      let(:facing) { "EAST" }
+
+      context "and turning LEFT" do
+        let(:turn) { "LEFT" }
+
+        it "turns to NORTH" do
+          expect(subject).to eq "NORTH"
+        end
+      end
+
+      context "and turning RIGHT" do
+        let(:turn) { "RIGHT" }
+
+        it "turns to SOUTH" do
+          expect(subject).to eq "SOUTH"
+        end
+      end
+    end
+
+    context "when facing WEST" do
+      let(:facing) { "WEST" }
+
+      context "and turning LEFT" do
+        let(:turn) { "LEFT" }
+
+        it "turns to SOUTH" do
+          expect(subject).to eq "SOUTH"
+        end
+      end
+
+      context "and turning RIGHT" do
+        let(:turn) { "RIGHT" }
+
+        it "turns to NORTH" do
+          expect(subject).to eq "NORTH"
+        end
+      end
+    end
+  end
+
 end
