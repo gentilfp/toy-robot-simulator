@@ -14,6 +14,11 @@ module ToyRobotSimulator
       !(@width.nil? || @height.nil?)
     end
 
+    def allowed_movement?(x, y, facing)
+      x, y = Movement.move(x, y, facing)
+      allowed_position?(x, y)
+    end
+
     def allowed_position?(x, y)
       raise Exceptions::PositionIsNotInteger unless x.is_a?(Integer) && y.is_a?(Integer)
 

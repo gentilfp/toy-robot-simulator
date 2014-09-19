@@ -37,6 +37,18 @@ describe ToyRobotSimulator::Tabletop do
     end
   end
 
+  describe "allowed_movement?" do
+    subject { tabletop.new }
+
+    it "returns true when going to a valid position on tabletop" do
+      expect(subject.allowed_movement?(0, 0, "NORTH")).to be true
+    end
+
+    it "returns false when going to invalid position on tabletop" do
+      expect(subject.allowed_movement?(0, 0, "WEST")).to be false
+    end
+  end
+
   describe "allowed_position?" do
     subject { tabletop.new }
 
