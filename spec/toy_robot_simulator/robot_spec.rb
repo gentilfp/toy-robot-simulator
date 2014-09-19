@@ -30,12 +30,14 @@ describe ToyRobotSimulator::Robot do
   end
 
   describe "#move" do
-    subject { robot.move(:foward) }
+    let(:command) { :foward }
+    subject { robot.move(command) }
 
     context "when robot is placed" do
       before :each do
         robot.place(2, 2, facing)
       end
+
 
       context "movement is allowed" do
         context "and it is facing NORTH or SOUTH" do
@@ -56,7 +58,8 @@ describe ToyRobotSimulator::Robot do
       end
 
       context "and movement is not allowed" do
-        let(:facing) { "NORTH" }
+        let(:command) { :backward }
+        let(:facing)  { "EAST" }
 
         it "raises TurnCommandNotAllowed exception" do
           expect{ subject }.to raise_error Exceptions::MoveCommandNotAllowed
