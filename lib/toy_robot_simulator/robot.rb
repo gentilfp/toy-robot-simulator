@@ -17,10 +17,11 @@ module ToyRobotSimulator
       self
     end
 
-    def move move
+    def move
       raise Exceptions::RobotNotPlaced unless placed?
-      raise Exceptions::MoveCommandNotAllowed unless Movement.allowed_movement?(move)
+      raise Exceptions::MoveCommandNotAllowed unless Movement.allowed_movement?(:foward)
 
+      @x, @y = Movement.move(@x, @y, @facing)
       self
     end
 
@@ -28,7 +29,7 @@ module ToyRobotSimulator
       raise Exceptions::RobotNotPlaced unless placed?
       raise Exceptions::TurnCommandNotAllowed unless Movement.allowed_turn?(turn)
 
-      @facing = Movement.turn(facing, turn)
+      @facing = Movement.turn(@facing, turn)
       self
     end
 

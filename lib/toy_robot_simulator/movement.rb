@@ -22,6 +22,16 @@ module ToyRobotSimulator
         ALLOWED_TURN.include?(turn.downcase.to_sym)
       end
 
+      def move current_x, current_y, current_facing
+        new_x, new_y = case current_facing.downcase.to_sym
+        when :north, :south
+          [ x, y + 1 ]
+        when :west, :east
+          [ x + 1, y ]
+        end
+        [ new_x, new_y ]
+      end
+
       def turn current_facing, turn_command
         @turn_command = turn_command
         new_facing = case current_facing.downcase.to_sym
