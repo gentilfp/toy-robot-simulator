@@ -9,7 +9,7 @@ module ToyRobotSimulator
 
     def place x, y, facing
       raise "PositionIsNotInteger" unless x.is_a?(Integer) && y.is_a?(Integer)
-      raise "FacingNotAllowed" unless ToyRobotSimulator::Movement.allowed_facing?(facing)
+      raise "FacingNotAllowed" unless Movement.allowed_facing?(facing)
 
       @x = x; @y = y; @facing = facing
       self
@@ -17,16 +17,16 @@ module ToyRobotSimulator
 
     def move move
       raise "RobotNotPlaced" unless placed?
-      raise "MoveCommandNotAllowed" unless ToyRobot::Movement.allowed_movement?(move)
+      raise "MoveCommandNotAllowed" unless Movement.allowed_movement?(move)
 
       self
     end
 
     def turn turn
       raise "RobotNotPlaced" unless placed?
-      raise "TurnCommandNotAllowed" unless ToyRobotSimulator::Movement.allowed_turn?(turn)
+      raise "TurnCommandNotAllowed" unless Movement.allowed_turn?(turn)
 
-      @facing = ToyRobotSimulator::Movement.turn(facing, turn)
+      @facing = Movement.turn(facing, turn)
       self
     end
 

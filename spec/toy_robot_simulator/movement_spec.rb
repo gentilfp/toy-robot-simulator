@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ToyRobotSimulator::Movement do
   describe "allowed_facing?" do
-    let(:allowed_facing?) { ToyRobotSimulator::Movement.allowed_facing?(facing) }
+    let(:allowed_facing?) { described_class.allowed_facing?(facing) }
 
     context "when facing is allowed" do
       context "NORTH" do
@@ -58,7 +58,7 @@ describe ToyRobotSimulator::Movement do
   end
 
   describe ".allowed_movement?" do
-    let(:allowed_movement?) { ToyRobotSimulator::Movement.allowed_movement?(movement) }
+    let(:allowed_movement?) { described_class.allowed_movement?(movement) }
 
     context "when movement is allowed" do
       context "FOWARD" do
@@ -90,7 +90,7 @@ describe ToyRobotSimulator::Movement do
   end
 
   describe ".allowed_turn?" do
-    let(:allowed_turn?) { ToyRobotSimulator::Movement.allowed_turn?(turn) }
+    let(:allowed_turn?) { described_class.allowed_turn?(turn) }
 
     context "when turn is allowed" do
       context "LEFT" do
