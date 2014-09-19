@@ -28,4 +28,10 @@ module Exceptions
       super("Turn command is not allowed")
     end
   end
+
+  class PositionCannotBeBlank < StandardError
+    def initialize
+      super("X, Y or Facing cannot be blank")
+    end
+  end
 end

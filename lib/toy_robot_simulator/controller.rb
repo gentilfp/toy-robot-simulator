@@ -22,7 +22,18 @@ module ToyRobotSimulator
       end
     end
 
-    def move
+    def move move
+      begin
+        if tabletop.allowed_movement?(robot.x, robot.y, robot.facing)
+          robot.move(move)
+        else
+          puts tabletop.invalid_position_message
+        end
+      rescue Exceptions::RobotNotPlaced => e
+        puts e.message
+      rescue Exceptions::MoveCommandNotAllowed => e
+        puts e.message
+      end
     end
 
     def turn turn_command
