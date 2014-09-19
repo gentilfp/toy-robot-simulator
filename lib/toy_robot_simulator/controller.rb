@@ -26,6 +26,13 @@ module ToyRobotSimulator
     end
 
     def turn turn_command
+      begin
+        robot.turn(turn_command)
+      rescue Exceptions::RobotNotPlaced => e
+        puts e.message
+      rescue Exceptions::TurnCommandNotAllowed => e
+        puts e.message
+      end
     end
   end
 end

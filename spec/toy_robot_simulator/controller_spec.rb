@@ -99,10 +99,10 @@ describe ToyRobotSimulator::Controller do
 
   describe "#turn" do
     let(:controller) { (described_class.new) }
-    let!(:turn) { controller.turn(command) }
 
     context "when robot is not placed" do
       let(:command) { nil }
+      let!(:turn) { controller.turn(command) }
 
       it "does not turn robot" do
         expect(controller.robot.x).to be_nil
@@ -115,6 +115,8 @@ describe ToyRobotSimulator::Controller do
       before :each do
         controller.place(0, 0, "NORTH")
       end
+
+      let!(:turn) { controller.turn(command) }
 
       context "and turn command is not allowed" do
         let(:command) { "DIREITA" }
