@@ -9,6 +9,8 @@ module ToyRobotSimulator
     end
 
     def place(x, y, facing)
+      x = integer! x
+      y = integer! y
       begin
         if tabletop.allowed_position?(x, y)
           robot.place(x, y, facing)
@@ -22,7 +24,7 @@ module ToyRobotSimulator
       end
     end
 
-    def move move
+    def move move: nil
       begin
         if tabletop.allowed_movement?(robot.x, robot.y, robot.facing)
           robot.move(move)
@@ -36,6 +38,14 @@ module ToyRobotSimulator
       end
     end
 
+    def left
+      turn "left"
+    end
+
+    def right
+      turn "right"
+    end
+
     def turn turn_command
       begin
         robot.turn(turn_command)
@@ -44,6 +54,15 @@ module ToyRobotSimulator
       rescue Exceptions::TurnCommandNotAllowed => e
         puts e.message
       end
+    end
+
+    def report
+      puts robot.report
+    end
+
+    private
+    def integer! number
+      number.to_i.to_s == number.to_s ? number.to_i : nil
     end
   end
 end

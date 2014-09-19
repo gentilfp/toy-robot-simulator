@@ -137,6 +137,19 @@ describe ToyRobotSimulator::Controller do
       context "when movement is allowed on tabletop" do
         let(:command) { "FORWARD" }
 
+        context "and position is not valid" do
+          let(:facing)  { "NORTH" }
+
+          after do
+            5.times{ controller.move(move: command) }
+          end
+
+          it "shows that position is not valid" do
+            expect(controller.tabletop).to receive(:invalid_position_message).
+              at_least(1).times.and_call_original
+          end
+        end
+
         context "and facing is NORTH" do
           let(:facing)  { "NORTH" }
 
@@ -180,6 +193,24 @@ describe ToyRobotSimulator::Controller do
     end
   end
 
+  describe "#left" do
+    let(:controller) { (described_class.new) }
+
+    it "calls turn with left parameter" do
+      expect(controller).to receive(:turn).with("left")
+      controller.left
+    end
+  end
+
+  describe "#right" do
+    let(:controller) { (described_class.new) }
+
+    it "calls turn with right parameter" do
+      expect(controller).to receive(:turn).with("right")
+      controller.right
+    end
+  end
+
   describe "#turn" do
     let(:controller) { (described_class.new) }
 
@@ -216,6 +247,15 @@ describe ToyRobotSimulator::Controller do
           expect(controller.robot.facing).to eq "EAST"
         end
       end
+    end
+  end
+
+  describe "#report" do
+    let(:controller) { (described_class.new) }
+
+    it "calls robot report method" do
+      expect(controller.robot).to receive(:report)
+      controller.report
     end
   end
 
