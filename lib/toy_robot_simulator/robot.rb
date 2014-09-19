@@ -17,9 +17,9 @@ module ToyRobotSimulator
       self
     end
 
-    def move
+    def move move
       raise Exceptions::RobotNotPlaced unless placed?
-      raise Exceptions::MoveCommandNotAllowed unless Movement.allowed_movement?(:foward)
+      raise Exceptions::MoveCommandNotAllowed unless Movement.allowed_movement?(move)
 
       @x, @y = Movement.move(@x, @y, @facing)
       self

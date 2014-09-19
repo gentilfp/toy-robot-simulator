@@ -25,9 +25,9 @@ module ToyRobotSimulator
       def move current_x, current_y, current_facing
         new_x, new_y = case current_facing.downcase.to_sym
         when :north, :south
-          [ x, y + 1 ]
+          [ current_x, current_y + 1 ]
         when :west, :east
-          [ x + 1, y ]
+          [ current_x + 1, current_y ]
         end
         [ new_x, new_y ]
       end
