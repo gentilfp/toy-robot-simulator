@@ -95,6 +95,89 @@ describe ToyRobotSimulator::Controller do
   end
 
   describe "#move" do
+    let(:controller) { described_class.new }
+
+    context "when robot is not placed" do
+      let(:command) { :foward }
+      let(:move) { controller.move(command) }
+
+      it "raises exception for PositionCannotBeBlak" do
+        expect{ move }.to raise_error Exceptions::PositionCannotBeBlank
+      end
+
+      context "but variables are being stubbed" do
+        it "does not move robot" do
+          expect(controller.tabletop).to receive(:allowed_movement?).and_return(true)
+          expect(controller.robot.x).to be_nil
+          expect(controller.robot.y).to be_nil
+          expect(controller.robot.facing).to be_nil
+          move
+        end
+      end
+    end
+
+    context "when robot is placed" do
+      before :each do
+        controller.place(2, 2, facing)
+      end
+
+      let!(:move) { controller.move(command) }
+
+      context "and command is not allowed" do
+        let(:command) { "BACKWARD" }
+        let(:facing)  { "NORTH" }
+
+        it "does not move robot" do
+          expect(controller.robot.x).to eq 2
+          expect(controller.robot.y).to eq 2
+          expect(controller.robot.facing).to eq "NORTH"
+        end
+      end
+
+      context "when movement is allowed on tabletop" do
+        let(:command) { "FORWARD" }
+
+        context "and facing is NORTH" do
+          let(:facing)  { "NORTH" }
+
+          it "moves 1 position up in Y" do
+            expect(controller.robot.x).to eq 2
+            expect(controller.robot.y).to eq 3
+            expect(controller.robot.facing).to eq "NORTH"
+          end
+        end
+
+        context "and facing is SOUTH" do
+          let(:facing)  { "SOUTH" }
+
+          it "moves 1 position down in Y" do
+            expect(controller.robot.x).to eq 2
+            expect(controller.robot.y).to eq 1
+            expect(controller.robot.facing).to eq "SOUTH"
+          end
+        end
+
+        context "and facing is WEST" do
+          let(:facing)  { "WEST" }
+
+          it "moves 1 position left in X" do
+            expect(controller.robot.x).to eq 1
+            expect(controller.robot.y).to eq 2
+            expect(controller.robot.facing).to eq "WEST"
+          end
+        end
+
+        context "and facing is EAST" do
+          let(:facing)  { "EAST" }
+
+          it "moves 1 position right in X" do
+            expect(controller.robot.x).to eq 3
+            expect(controller.robot.y).to eq 2
+            expect(controller.robot.facing).to eq "EAST"
+          end
+        end
+      end
+    end
   end
 
   describe "#turn" do
