@@ -26,6 +26,7 @@ module ToyRobotSimulator
       raise "RobotNotPlaced" unless placed?
       raise "TurnCommandNotAllowed" unless ToyRobotSimulator::Movement.allowed_turn?(turn)
 
+      @facing = ToyRobotSimulator::Movement.turn(facing, turn)
       self
     end
 
