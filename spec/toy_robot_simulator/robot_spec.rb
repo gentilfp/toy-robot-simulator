@@ -17,13 +17,13 @@ describe ToyRobotSimulator::Robot do
     context "when placed to an invalid place onto tabletop" do
       context "when position is not integer" do
         it "raises PositionNotInteger" do
-          expect{ robot.place("a", 0, "NORTH") }.to raise_error("PositionIsNotInteger")
+          expect{ robot.place("a", 0, "NORTH") }.to raise_error Exceptions::PositionIsNotInteger
         end
       end
 
       context "when facing is not allowed" do
         it "raises FacingNotAllowed" do
-          expect{ robot.place(0, 0, "NORTE") }.to raise_error("FacingNotAllowed")
+          expect{ robot.place(0, 0, "NORTE") }.to raise_error Exceptions::FacingNotAllowed
         end
       end
     end
@@ -61,7 +61,7 @@ describe ToyRobotSimulator::Robot do
         let(:turn) { "DIREITA" }
 
         it "raises TurnCommandNotAllowed exception" do
-          expect{ subject }.to raise_error "TurnCommandNotAllowed"
+          expect{ subject }.to raise_error Exceptions::TurnCommandNotAllowed
         end
       end
     end
@@ -70,7 +70,7 @@ describe ToyRobotSimulator::Robot do
       let(:turn) { "RIGHT" }
 
       it "raises RobotNotPlaced exception" do
-        expect{ subject }.to raise_error "RobotNotPlaced"
+        expect{ subject }.to raise_error Exceptions::RobotNotPlaced
       end
     end
   end
@@ -89,7 +89,7 @@ describe ToyRobotSimulator::Robot do
 
     context "when robot is not placed" do
       it "raises NotPlacedRobot" do
-        expect{ robot.report }.to raise_error("NotPlacedRobot")
+        expect{ robot.report }.to raise_error Exceptions::RobotNotPlaced
       end
     end
   end
