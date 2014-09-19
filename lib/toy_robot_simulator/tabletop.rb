@@ -15,7 +15,13 @@ module ToyRobotSimulator
     end
 
     def allowed_position?(x, y)
-      allowed_x?(x) && allowed_y?(y)
+      raise Exceptions::PositionIsNotInteger unless x.is_a?(Integer) && y.is_a?(Integer)
+
+      allowed_x?(x.to_i) && allowed_y?(y.to_i)
+    end
+
+    def invalid_position_message
+      "Position is not valid in this tabletop"
     end
 
     private
