@@ -61,8 +61,8 @@ describe ToyRobotSimulator::Movement do
     let(:allowed_movement?) { described_class.allowed_movement?(movement) }
 
     context "when movement is allowed" do
-      context "FOWARD" do
-        let(:movement) { "FOWARD" }
+      context "FORWARD" do
+        let(:movement) { "FORWARD" }
 
         it "returns true" do
           expect(allowed_movement?).to eq true

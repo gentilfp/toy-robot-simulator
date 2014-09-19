@@ -30,7 +30,7 @@ describe ToyRobotSimulator::Robot do
   end
 
   describe "#move" do
-    let(:command) { :foward }
+    let(:command) { "FORWARD" }
     subject { robot.move(command) }
 
     context "when robot is placed" do

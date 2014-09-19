@@ -1,7 +1,7 @@
 module ToyRobotSimulator
   class Movement
     ALLOWED_FACINGS   = [:north, :south, :east, :west]
-    ALLOWED_MOVEMENTS = [:foward]
+    ALLOWED_MOVEMENTS = [:forward]
     ALLOWED_TURN      = [:left, :right]
 
     attr_accessor :turn_command
@@ -23,6 +23,8 @@ module ToyRobotSimulator
       end
 
       def move current_x, current_y, current_facing
+        raise Exceptions::PositionCannotBeBlank if current_x.nil? || current_y.nil? || current_facing.nil?
+
         new_x, new_y = case current_facing.downcase.to_sym
         when :north
           [ current_x, current_y + 1 ]
