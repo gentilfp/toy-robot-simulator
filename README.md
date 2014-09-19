@@ -1,24 +1,96 @@
-# ToyRobotSimulator
+ToyRobotSimulator
+===================
 
-TODO: Write a gem description
+Implementation of the awesome toy robot simulator code challenge.
+
+## Description
+The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units.
+There are no other obstructions on the table surface.
+The robot is free to roam around the surface of the table, but must be prevented from falling to destruction. 
+Any movement that would result in the robot falling from the table must be prevented, however further valid movement commands must still be allowed.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+### Manually
 
-    gem 'toy_robot_simulator'
+Clone this repository and run bundle.
 
-And then execute:
-
+    $ git clone git@github.com:fpgentil/toy_robot_simulator.git
+    $ cd toy_robot_simulator
     $ bundle
 
-Or install it yourself as:
+## Running
 
-    $ gem install toy_robot_simulator
+    $ ruby bin/toy_robot_simulator
 
 ## Usage
 
-TODO: Write usage instructions here
+The application reads the following commands:
+
+    PLACE X, Y, FACING
+    MOVE
+    LEFT
+    RIGHT
+    REPORT
+
+### PLACE
+
+    It places the robot onto the tabletop at (X,Y) facing to FACING
+
+### MOVE
+
+    It moves forward the robot based on its facing
+
+### LEFT
+
+    It turns robot facing to left
+
+### RIGHT
+
+    It turns robot facing to right
+
+### REPORT
+
+    It outputs the current position and the facing of the robot
+
+
+## Constraints
+
+The toy robot does not fall off the table during movement. 
+This also includes the initial placement of the toy robot.
+Any move that would cause the robot to fall is ignored.
+
+
+## Examples
+
+### Example 1
+
+    PLACE 0, 0, NORTH
+    MOVE
+    REPORT
+
+    0, 1, NORTH
+
+### Example 2
+
+    PLACE 0, 0, NORTH
+    LEFT
+    REPORT
+
+    0, 0, WEST
+
+### Example 3
+
+
+    PLACE 1, 2, EAST
+    MOVE
+    MOVE
+    LEFT
+    MOVE
+    REPORT
+
+    3, 3, NORTH
+
 
 ## Contributing
 
