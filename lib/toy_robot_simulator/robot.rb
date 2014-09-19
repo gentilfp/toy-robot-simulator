@@ -4,6 +4,8 @@ module ToyRobotSimulator
   class Robot
     attr_accessor :x, :y, :facing
 
+    DEFAULT_MOVEMENT = "FORWARD"
+
     def initialize
       @x = nil; @y = nil; @facing = nil
       self
@@ -18,6 +20,7 @@ module ToyRobotSimulator
     end
 
     def move move
+      move ||= DEFAULT_MOVEMENT
       raise Exceptions::RobotNotPlaced unless placed?
       raise Exceptions::MoveCommandNotAllowed unless Movement.allowed_movement?(move)
 
