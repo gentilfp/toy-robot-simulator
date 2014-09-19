@@ -99,7 +99,7 @@ describe ToyRobotSimulator::Controller do
 
     context "when robot is not placed" do
       let(:command) { :foward }
-      let(:move) { controller.move(command) }
+      let(:move) { controller.move(move: command) }
 
       it "raises exception for PositionCannotBeBlak" do
         expect{ move }.to raise_error Exceptions::PositionCannotBeBlank
@@ -121,7 +121,7 @@ describe ToyRobotSimulator::Controller do
         controller.place(2, 2, facing)
       end
 
-      let!(:move) { controller.move(command) }
+      let!(:move) { controller.move(move: command) }
 
       context "and command is not allowed" do
         let(:command) { "BACKWARD" }
